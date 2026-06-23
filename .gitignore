@@ -1,0 +1,25 @@
+# === Backend (.NET) ===
+backend/**/bin/
+backend/**/obj/
+backend/**/.vs/
+backend/**/.env
+
+# === Frontend (Node) ===
+frontend/**/node_modules/
+frontend/**/dist/
+frontend/**/.env
+frontend/**/.env.local
+frontend/**/.vite/
+
+# === IDEs ===
+.vscode/
+.idea/
+*.suo
+*.user
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log

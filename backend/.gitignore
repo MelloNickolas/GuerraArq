@@ -1,0 +1,15 @@
+# Build outputs
+bin/
+obj/
+
+# Variáveis sensíveis
+.env
+.env.local
+
+# IDEs
+.vs/
+.vscode/
+.idea/
+
+# Logs
+*.log
