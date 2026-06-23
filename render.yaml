@@ -1,0 +1,42 @@
+# Blueprint do Render — define a infraestrutura do backend.
+# https://render.com/docs/blueprint-spec
+#
+# Ao conectar este repo no Render via "New > Blueprint", ele cria automaticamente
+# o serviço com as configs abaixo. As variáveis de ambiente (sync: false) ficam
+# pendentes pra você preencher na UI antes do primeiro deploy.
+
+services:
+  - type: web
+    name: guerraarq-api
+    runtime: docker
+    region: oregon
+    plan: free
+    branch: main
+    # Caminho do Dockerfile dentro do repo.
+    dockerfilePath: ./backend/GuerraArq.Api/Dockerfile
+    # Contexto do build = pasta onde rodam os COPY do Dockerfile.
+    dockerContext: ./backend/GuerraArq.Api
+    # Endpoint que o Render usa pra health check (qualquer rota pública 200).
+    healthCheckPath: /api/studio
+    envVars:
+      # === Banco (Neon) ===
+      - key: DATABASE_URL
+        sync: false
+      # === Credenciais do admin ===
+      - key: ADMIN_USER
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # === JWT ===
+      - key: JWT_SECRET
+        sync: false
+      # === Cloudinary ===
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      # === CORS — URL do front no Vercel (preenche depois do front subir) ===
+      - key: CORS_ORIGIN
+        sync: false
