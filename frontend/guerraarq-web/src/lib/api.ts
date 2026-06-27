@@ -85,6 +85,9 @@ export interface StudioInfo {
   anoFundacao?: number | null;
   statCustomLabel?: string | null;
   statCustomValor?: string | null;
+  heroTitulo?: string | null;
+  heroTituloDestaque?: string | null;
+  heroLead?: string | null;
   sobreParagrafos: string[];
   servicos: string[];
   fotoArquitetaUrl?: string | null;

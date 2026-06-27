@@ -53,6 +53,9 @@ public class StudioController : ControllerBase
             AnoFundacao = info.AnoFundacao,
             StatCustomLabel = info.StatCustomLabel,
             StatCustomValor = info.StatCustomValor,
+            HeroTitulo = info.HeroTitulo,
+            HeroTituloDestaque = info.HeroTituloDestaque,
+            HeroLead = info.HeroLead,
             SobreParagrafos = info.SobreParagrafos,
             Servicos = info.Servicos,
             FotoArquitetaUrl = info.FotoArquitetaUrl,
@@ -86,6 +89,9 @@ public class StudioController : ControllerBase
         info.AnoFundacao = dto.AnoFundacao;
         info.StatCustomLabel = dto.StatCustomLabel;
         info.StatCustomValor = dto.StatCustomValor;
+        info.HeroTitulo = dto.HeroTitulo;
+        info.HeroTituloDestaque = dto.HeroTituloDestaque;
+        info.HeroLead = dto.HeroLead;
         info.SobreParagrafos = dto.SobreParagrafos;
         info.Servicos = dto.Servicos;
         info.FotoArquitetaUrl = dto.FotoArquitetaUrl;

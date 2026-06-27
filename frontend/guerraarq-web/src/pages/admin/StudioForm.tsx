@@ -18,6 +18,9 @@ const inicial: StudioForm = {
   anoFundacao: new Date().getFullYear(),
   statCustomLabel: "Sob medida",
   statCustomValor: "100%",
+  heroTitulo: "",
+  heroTituloDestaque: "",
+  heroLead: "",
   sobreParagrafos: [""],
   servicos: ["", "", "", ""],
   fotoArquitetaUrl: null,
@@ -198,6 +201,47 @@ export default function StudioForm() {
                     />
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* === Hero (banner da home) === */}
+            <div className="admin-card">
+              <h2>Hero da home</h2>
+              <p className="muted" style={{ marginBottom: 14 }}>
+                Texto grande que aparece no topo do site. A parte "destaque" fica em verde.
+              </p>
+
+              <div className="field">
+                <label>Título principal</label>
+                <input
+                  type="text"
+                  value={form.heroTitulo ?? ""}
+                  onChange={(e) => atualizar("heroTitulo", e.target.value)}
+                  placeholder="Projetos que traduzem o jeito de"
+                />
+              </div>
+
+              <div className="field">
+                <label>Trecho em destaque (verde)</label>
+                <input
+                  type="text"
+                  value={form.heroTituloDestaque ?? ""}
+                  onChange={(e) => atualizar("heroTituloDestaque", e.target.value)}
+                  placeholder="viver e habitar."
+                />
+                <span className="muted" style={{ fontSize: 12 }}>
+                  Aparece logo depois do título principal, em verde.
+                </span>
+              </div>
+
+              <div className="field">
+                <label>Parágrafo descritivo</label>
+                <textarea
+                  value={form.heroLead ?? ""}
+                  onChange={(e) => atualizar("heroLead", e.target.value)}
+                  rows={3}
+                  placeholder="Texto curto que aparece abaixo do título principal."
+                />
               </div>
             </div>
 

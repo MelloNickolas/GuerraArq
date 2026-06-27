@@ -130,7 +130,7 @@ export default function Projects({ projetos }: Props) {
               {/* Tags: categoria, área (se houver), status. */}
               <div className="tags">
                 <span>{p.categoria}</span>
-                {p.areaM2 && <span>{p.areaM2} m²</span>}
+                {p.areaM2 && <span>{p.areaM2.toLocaleString("pt-BR")} m²</span>}
                 {p.status && <span>{p.status}</span>}
               </div>
             </Link>

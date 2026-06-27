@@ -23,14 +23,17 @@ export default function Hero({ studio }: Props) {
             Estúdio de arquitetura · Brasil
           </span>
 
-          {/* Título principal — usamos data-reveal-mask pra efeito de "cortina". */}
+          {/* Título principal — usa dados do admin com fallback genérico.
+              A parte "destaque" aparece em verde (em). */}
           <h1 data-reveal data-reveal-mask>
-            Projetos que<br />traduzem o jeito<br />de <em>viver e habitar.</em>
+            {studio?.heroTitulo || "Projetos que traduzem o jeito de"}
+            {" "}
+            <em>{studio?.heroTituloDestaque || "viver e habitar."}</em>
           </h1>
 
           <p className="lead" data-reveal>
-            Desenhamos espaços residenciais e comerciais com foco em luz natural,
-            materialidade e funcionalidade — do estudo conceitual à entrega final.
+            {studio?.heroLead ||
+              "Desenhamos espaços residenciais e comerciais com foco em luz natural, materialidade e funcionalidade — do estudo conceitual à entrega final."}
           </p>
 
           {/* Botões de chamada — Ver projetos rola até a seção; Iniciar projeto rola pro contato. */}
@@ -81,11 +84,8 @@ export default function Hero({ studio }: Props) {
           ) : (
             <div className="ph" data-label="sua foto profissional · 4:5"></div>
           )}
-          <div className="photo-tag">
-            <span className="dot"></span> retrato / estúdio
-          </div>
           <div className="float-badge">
-            <b>Guerra Arq</b>
+            <b>Guerra</b>
             <span>Arquiteto responsável</span>
           </div>
         </div>

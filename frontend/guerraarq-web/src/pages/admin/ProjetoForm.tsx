@@ -220,10 +220,18 @@ export default function ProjetoForm() {
                 </div>
                 <div className="field">
                   <label>Área (m²)</label>
+                  {/* Formata o número com separador de milhar brasileiro (1.000, 1.000.000)
+                      enquanto o usuário digita. Internamente guardamos só o número puro. */}
                   <input
-                    type="number"
-                    value={form.areaM2 ?? ""}
-                    onChange={(e) => atualizar("areaM2", e.target.value ? Number(e.target.value) : null)}
+                    type="text"
+                    inputMode="numeric"
+                    value={form.areaM2 != null ? form.areaM2.toLocaleString("pt-BR") : ""}
+                    onChange={(e) => {
+                      // Remove tudo que não for dígito (incluindo os pontos automáticos).
+                      const digitos = e.target.value.replace(/\D/g, "");
+                      atualizar("areaM2", digitos ? Number(digitos) : null);
+                    }}
+                    placeholder="ex: 1.000"
                   />
                 </div>
               </div>
@@ -268,22 +276,58 @@ export default function ProjetoForm() {
                 </div>
               </div>
 
+              {/* === Ferramentas ===
+                  Cada ferramenta tem seu próprio input, com botão pra remover.
+                  Botão "Adicionar ferramenta" abaixo adiciona um campo novo. */}
               <div className="field">
-                <label>Ferramentas (separadas por vírgula)</label>
-                <input
-                  type="text"
-                  value={form.ferramentas.join(", ")}
-                  onChange={(e) =>
-                    atualizar(
-                      "ferramentas",
-                      e.target.value
-                        .split(",")
-                        .map((s) => s.trim())
-                        .filter(Boolean)
-                    )
+                <label>Ferramentas usadas</label>
+                {form.ferramentas.length === 0 && (
+                  <p className="muted" style={{ fontSize: 13, marginBottom: 6 }}>
+                    Nenhuma ferramenta adicionada ainda.
+                  </p>
+                )}
+                {form.ferramentas.map((f, i) => (
+                  <div
+                    key={i}
+                    style={{ display: "flex", gap: 8, marginBottom: 8 }}
+                  >
+                    <input
+                      type="text"
+                      value={f}
+                      onChange={(e) => {
+                        // Atualiza só o item nesse índice, mantendo os outros.
+                        const novas = [...form.ferramentas];
+                        novas[i] = e.target.value;
+                        atualizar("ferramentas", novas);
+                      }}
+                      placeholder="ex: AutoCAD"
+                      style={{ flex: 1 }}
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={() =>
+                        atualizar(
+                          "ferramentas",
+                          form.ferramentas.filter((_, idx) => idx !== i)
+                        )
+                      }
+                      aria-label={`Remover ${f || "ferramenta"}`}
+                    >
+                      Remover
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  style={{ marginTop: 4 }}
+                  onClick={() =>
+                    atualizar("ferramentas", [...form.ferramentas, ""])
                   }
-                  placeholder="AutoCAD, SketchUp, Lumion, Photoshop"
-                />
+                >
+                  + Adicionar ferramenta
+                </button>
               </div>
             </div>
 

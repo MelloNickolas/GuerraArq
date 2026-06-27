@@ -12,6 +12,9 @@ public class StudioInfoUpsertDto
     public int? AnoFundacao { get; set; }
     public string? StatCustomLabel { get; set; }
     public string? StatCustomValor { get; set; }
+    public string? HeroTitulo { get; set; }
+    public string? HeroTituloDestaque { get; set; }
+    public string? HeroLead { get; set; }
     public List<string> SobreParagrafos { get; set; } = new();
     public List<string> Servicos { get; set; } = new();
     public string? FotoArquitetaUrl { get; set; }
@@ -30,6 +33,9 @@ public class StudioInfoPublicoDto
     public int? AnoFundacao { get; set; }
     public string? StatCustomLabel { get; set; }
     public string? StatCustomValor { get; set; }
+    public string? HeroTitulo { get; set; }
+    public string? HeroTituloDestaque { get; set; }
+    public string? HeroLead { get; set; }
     public List<string> SobreParagrafos { get; set; } = new();
     public List<string> Servicos { get; set; } = new();
     public string? FotoArquitetaUrl { get; set; }

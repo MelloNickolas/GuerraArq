@@ -327,6 +327,13 @@ nav.links a:hover::after {
   border-top: 1px solid var(--line);
 }
 
+/* Cada coluna do hero-meta agora centraliza seu conteúdo,
+   pra deixar o layout consistente mesmo com labels de tamanhos diferentes. */
+.hero-meta > div {
+  text-align: center;
+  flex: 1;
+}
+
 .hero-meta div b {
   display: block;
   font-size: 30px;

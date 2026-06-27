@@ -155,7 +155,7 @@ export default function ProjetoDetalhe() {
               <span className="lbl">Ano / Área</span>
               <span className="val">
                 {projeto.ano}
-                {projeto.areaM2 ? ` · ${projeto.areaM2} m²` : ""}
+                {projeto.areaM2 ? ` · ${projeto.areaM2.toLocaleString("pt-BR")} m²` : ""}
               </span>
             </div>
             {projeto.status && (

@@ -38,6 +38,22 @@ public class StudioInfo
     [MaxLength(20)]
     public string? StatCustomValor { get; set; } = "100%";
 
+    // === Hero (banner principal da home) ===
+
+    // Texto principal do título (parte sem destaque).
+    // Ex: "Projetos que traduzem o jeito de"
+    [MaxLength(300)]
+    public string? HeroTitulo { get; set; }
+
+    // Trecho destacado em verde no título.
+    // Ex: "viver e habitar."
+    [MaxLength(150)]
+    public string? HeroTituloDestaque { get; set; }
+
+    // Parágrafo descritivo abaixo do título.
+    [MaxLength(600)]
+    public string? HeroLead { get; set; }
+
     // === Seção "Sobre" ===
 
     // Parágrafos do texto sobre o estúdio.
