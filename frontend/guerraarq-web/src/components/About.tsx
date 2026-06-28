@@ -2,6 +2,7 @@
 // Todos os textos vêm das infos cadastradas no admin (com fallback genérico).
 
 import type { StudioInfo } from "../lib/api";
+import { cldUrl } from "../lib/cloudinary";
 
 interface Props {
   studio: StudioInfo | null;
@@ -33,9 +34,11 @@ export default function About({ studio }: Props) {
           <div className="frame">
             {studio?.fotoEstudioUrl ? (
               <img
-                src={studio.fotoEstudioUrl}
+                // Cloudinary otimizado (800px de largura, formato auto).
+                src={cldUrl(studio.fotoEstudioUrl, { width: 800, crop: "limit" })}
                 alt="Foto do estúdio do arquiteto"
                 className="photo-real"
+                loading="lazy"
                 data-parallax="0.12"
               />
             ) : (
@@ -84,7 +87,7 @@ export default function About({ studio }: Props) {
 
           {/* Assinatura estilizada. */}
           <div className="about-sign" data-reveal>
-            <span className="sg">Guerra</span>
+            <span className="sg">Gabriel Guerra</span>
             <span className="role">Arquiteto responsável</span>
           </div>
         </div>

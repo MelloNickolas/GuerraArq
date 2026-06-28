@@ -9,6 +9,7 @@ import Lightbox from "../components/Lightbox";
 import { projetosApi, studioApi, type Projeto, type StudioInfo } from "../lib/api";
 import { useReveal } from "../lib/useReveal";
 import { useNavScroll } from "../lib/useNavScroll";
+import { cldUrl } from "../lib/cloudinary";
 
 export default function ProjetoDetalhe() {
   // Pega o slug da URL (/projetos/:slug).
@@ -110,7 +111,14 @@ export default function ProjetoDetalhe() {
         <div className="featured" data-reveal>
           <div className="frame">
             {projeto.capaUrl ? (
-              <img src={projeto.capaUrl} alt={projeto.titulo} className="photo-real" />
+              <img
+                // Capa do detalhe é grande, pede 1600px pra ficar nítido em telas grandes.
+                src={cldUrl(projeto.capaUrl, { width: 1600, crop: "limit" })}
+                alt={projeto.titulo}
+                className="photo-real"
+                loading="eager"
+                fetchPriority="high"
+              />
             ) : (
               <div className="ph" data-label="capa do projeto · 16:9"></div>
             )}
@@ -188,7 +196,12 @@ export default function ProjetoDetalhe() {
                 // Clicar abre o lightbox no índice correspondente.
                 onClick={() => setLightboxIndice(i)}
               >
-                <img src={img.url} alt={img.descricao || `Imagem ${i + 1}`} />
+                {/* Galeria: imagens com lazy loading + tamanho otimizado pra grid. */}
+                <img
+                  src={cldUrl(img.url, { width: 1000, crop: "limit" })}
+                  alt={img.descricao || `Imagem ${i + 1}`}
+                  loading="lazy"
+                />
                 {img.descricao && <div className="cap">{img.descricao}</div>}
               </div>
             ))}

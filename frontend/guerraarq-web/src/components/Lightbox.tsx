@@ -3,6 +3,7 @@
 
 import { useEffect, useCallback } from "react";
 import type { GaleriaItem } from "../lib/api";
+import { cldUrl } from "../lib/cloudinary";
 
 interface Props {
   // Lista completa de imagens da galeria (pra navegação).
@@ -102,7 +103,8 @@ export default function Lightbox({ imagens, indice, onClose, onNavegar }: Props)
 
       {/* Contêiner da imagem — stopPropagation pra não fechar ao clicar nela. */}
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-        <img src={imagem.url} alt={imagem.descricao || ""} />
+        {/* Lightbox = tela cheia. Pedimos 2000px pra qualidade alta. */}
+        <img src={cldUrl(imagem.url, { width: 2000, crop: "limit" })} alt={imagem.descricao || ""} />
 
         {/* Descrição + contador (1 / 6). */}
         <div className="lightbox-caption">

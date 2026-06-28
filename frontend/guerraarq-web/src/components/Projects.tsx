@@ -4,6 +4,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import type { Projeto } from "../lib/api";
+import { cldUrl } from "../lib/cloudinary";
 
 interface Props {
   projetos: Projeto[];
@@ -109,7 +110,13 @@ export default function Projects({ projetos }: Props) {
                 {/* Imagem real ou placeholder, dependendo se tem capa. */}
                 <div className="imgscale">
                   {p.capaUrl ? (
-                    <img src={p.capaUrl} alt={p.titulo} className="imgreal" />
+                    <img
+                      // Card aparece em 2 colunas → 800px é mais que suficiente.
+                      src={cldUrl(p.capaUrl, { width: 800, crop: "limit" })}
+                      alt={p.titulo}
+                      className="imgreal"
+                      loading="lazy"
+                    />
                   ) : (
                     <div className="ph" data-label="foto do projeto · 16:11"></div>
                   )}

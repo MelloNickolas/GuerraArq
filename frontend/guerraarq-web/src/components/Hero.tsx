@@ -3,6 +3,7 @@
 
 import type { StudioInfo } from "../lib/api";
 import Counter from "./Counter";
+import { cldUrl } from "../lib/cloudinary";
 
 interface Props {
   studio: StudioInfo | null;
@@ -76,16 +77,20 @@ export default function Hero({ studio }: Props) {
         <div className="hero-photo" data-reveal>
           {studio?.fotoArquitetaUrl ? (
             <img
-              src={studio.fotoArquitetaUrl}
+              // Pede ao Cloudinary uma versão otimizada (800px, q_auto, f_auto).
+              src={cldUrl(studio.fotoArquitetaUrl, { width: 800, crop: "limit" })}
               alt="Foto do arquiteto"
               className="photo-real"
+              // Hero é "above the fold" — carrega com prioridade alta.
+              loading="eager"
+              fetchPriority="high"
               style={{ aspectRatio: "4 / 5", borderRadius: "var(--r)", width: "100%", objectFit: "cover" }}
             />
           ) : (
             <div className="ph" data-label="sua foto profissional · 4:5"></div>
           )}
           <div className="float-badge">
-            <b>Guerra</b>
+            <b>Gabriel Guerra</b>
             <span>Arquiteto responsável</span>
           </div>
         </div>
