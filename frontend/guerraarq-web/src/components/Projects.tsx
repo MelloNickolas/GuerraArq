@@ -4,7 +4,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import type { Projeto } from "../lib/api";
-import { cldUrl } from "../lib/cloudinary";
+import SmartImage from "./SmartImage";
 
 interface Props {
   projetos: Projeto[];
@@ -110,12 +110,14 @@ export default function Projects({ projetos }: Props) {
                 {/* Imagem real ou placeholder, dependendo se tem capa. */}
                 <div className="imgscale">
                   {p.capaUrl ? (
-                    <img
-                      // Card aparece em 2 colunas → 800px é mais que suficiente.
-                      src={cldUrl(p.capaUrl, { width: 800, crop: "limit" })}
+                    // SmartImage mostra placeholder borrado instantâneo + fade-in
+                    // quando a versão final (800px otimizada) termina de carregar.
+                    <SmartImage
+                      src={p.capaUrl}
+                      width={800}
                       alt={p.titulo}
                       className="imgreal"
-                      loading="lazy"
+                      priority="lazy"
                     />
                   ) : (
                     <div className="ph" data-label="foto do projeto · 16:11"></div>

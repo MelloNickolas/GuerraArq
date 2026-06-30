@@ -49,3 +49,16 @@ export function cldSrcSet(url: string, larguras: number[] = [400, 800, 1200, 160
     .map((w) => `${cldUrl(url, { width: w, crop: "limit" })} ${w}w`)
     .join(", ");
 }
+
+/**
+ * Gera URL de um placeholder minúsculo e borrado da imagem (~1-3 KB).
+ * Usado pra mostrar uma "prévia" instantânea enquanto a versão final carrega.
+ * Técnica chamada "blur-up" — mesma usada pelo Instagram e Medium.
+ */
+export function cldPlaceholder(url: string | null | undefined): string {
+  if (!url || !url.includes("res.cloudinary.com")) return "";
+  // w_40 = imagem com 40px de largura (muito pequena = baixa o arquivo num piscar)
+  // e_blur:1000 = aplica blur forte (pra esconder a baixa qualidade)
+  // q_30 = qualidade baixa (arquivo ainda menor)
+  return url.replace("/upload/", "/upload/w_40,e_blur:1000,q_30,f_auto/");
+}

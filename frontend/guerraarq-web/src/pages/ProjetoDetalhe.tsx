@@ -10,6 +10,7 @@ import { projetosApi, studioApi, type Projeto, type StudioInfo } from "../lib/ap
 import { useReveal } from "../lib/useReveal";
 import { useNavScroll } from "../lib/useNavScroll";
 import { cldUrl } from "../lib/cloudinary";
+import SmartImage from "../components/SmartImage";
 
 export default function ProjetoDetalhe() {
   // Pega o slug da URL (/projetos/:slug).
@@ -111,13 +112,12 @@ export default function ProjetoDetalhe() {
         <div className="featured" data-reveal>
           <div className="frame">
             {projeto.capaUrl ? (
-              <img
-                // Capa do detalhe é grande, pede 1600px pra ficar nítido em telas grandes.
-                src={cldUrl(projeto.capaUrl, { width: 1600, crop: "limit" })}
+              <SmartImage
+                src={projeto.capaUrl}
+                width={1600}
                 alt={projeto.titulo}
                 className="photo-real"
-                loading="eager"
-                fetchPriority="high"
+                priority="eager"
               />
             ) : (
               <div className="ph" data-label="capa do projeto · 16:9"></div>
@@ -196,11 +196,12 @@ export default function ProjetoDetalhe() {
                 // Clicar abre o lightbox no índice correspondente.
                 onClick={() => setLightboxIndice(i)}
               >
-                {/* Galeria: imagens com lazy loading + tamanho otimizado pra grid. */}
-                <img
-                  src={cldUrl(img.url, { width: 1000, crop: "limit" })}
+                {/* Galeria: SmartImage com blur-up + lazy loading. */}
+                <SmartImage
+                  src={img.url}
+                  width={1000}
                   alt={img.descricao || `Imagem ${i + 1}`}
-                  loading="lazy"
+                  priority="lazy"
                 />
                 {img.descricao && <div className="cap">{img.descricao}</div>}
               </div>
